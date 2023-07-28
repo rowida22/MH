@@ -2,7 +2,12 @@ class Square:
     def __init__(self, size=0):
         self.__size = size      
 
-        if  not isinstance(self.__size,int):
+    @property
+    def size(self):
+       return self.__size
+    @size.setter
+    def size(self, value):
+        if  not isinstance(value,int):
             raise TypeError("size must be an integer")
     
         if self.__size < 0:
@@ -13,18 +18,14 @@ class Square:
       
 
 
-my_square_1 = Square(3)
-print("Area: {}".format(my_square_1.area()))
+my_square = Square(89)
+print("Area: {} for size: {}".format(my_square.area(), my_square.size))
+
+my_square.size = 3
+print("Area: {} for size: {}".format(my_square.area(), my_square.size))
 
 try:
-    print(my_square_1.size)
+    my_square.size = "5 feet"
+    print("Area: {} for size: {}".format(my_square.area(), my_square.size))
 except Exception as e:
     print(e)
-
-try:
-    print(my_square_1.__size)
-except Exception as e:
-    print(e)
-
-my_square_2 = Square(5)
-print("Area: {}".format(my_square_2.area()))
